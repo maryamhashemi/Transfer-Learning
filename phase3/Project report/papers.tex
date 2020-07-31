@@ -42,7 +42,7 @@ $D_s$
 است که مشکل نامتوازن بودن مجموعه داده را حل می‌کند.
 \lr{W-BDA}
  می‌تواند هنگام انجام تطبیق توزیع، وزن هر کلاس را به طور انطباقی تغییر دهد.
- 	\subsection{BDA}
+ 	\subsubsection{BDA}
  	{
  		همانطور که توضیح دادیم در تطبیق دامنه، با کاهش واگرایی یا فاصله ی بین احتمال های حاشیه ای و شرطی می توانیم دامنه های مبدا و هدف را تطبیق دهیم. این موضوع را میتوانیم به صورت عبارت زیر بیان کنیم:
  		\begin{equation}
@@ -73,7 +73,7 @@ $D_s$
  		  را می توان به صورت زیر نوشت:
  		  \begin{equation}
 	 	  \begin{aligned}
-		  min \quad tr \left( A^{T}X \left( \left( 1 - \mu \right) M_{0} + mu \sum _{c=1\mathrm{ }}^{C}M_{c} \right) X^{T}A \right) + \lambda \Vert A \Vert_{F}^{2} \\
+		  min \quad tr \left( A^{T}X \left( \left( 1 - \mu \right) M_{0} + \mu \sum _{c=1\mathrm{ }}^{C}M_{c} \right) X^{T}A \right) + \lambda \Vert A \Vert_{F}^{2} \\
 		  s.t. \quad A^{T}XHX^{T}A = I, \quad  0  \leq \mu \leq  1 \quad \quad \quad \quad \quad
 		  \label{eq:4}
 	 	  \end{aligned}
@@ -84,25 +84,121 @@ $D_s$
  		    
  		    برای حل عبارت 
  		    \ref{eq:4}
- 		    از ضرائب لاگرانژ استفاده می کنیم. بنابراین اگر ضرائب لاگرانژ باشد، خواهیم داشت: 
+ 		    از ضرائب لاگرانژ استفاده می کنیم. بنابراین اگر ضرائب لاگرانژ 
+ 		    $\phi = \left\lbrace \phi_1, \phi_2, ... , \phi_d \right\rbrace  $
+ 		    باشد، خواهیم داشت: 
  		    \begin{equation}
  		    	\begin{aligned}
- 		    	L = tr \left( A^{T}X \left( \left( 1 - \mu \right) M_{0} + mu \sum _{c=1\mathrm{ }}^{C}M_{c} \right) X^{T}A \right) + \lambda \Vert A \Vert_{F}^{2} + tr \left( \left( I -  A^{T}XHX^{T}A)\right) \phi \right) 
+ 		    	L = tr \left( A^{T}X \left( \left( 1 - \mu \right) M_{0} + \mu \sum _{c=1\mathrm{ }}^{C}M_{c} \right) X^{T}A \right) + \lambda \Vert A \Vert_{F}^{2} + tr \left( \left( I -  A^{T}XHX^{T}A)\right) \phi \right) 
  		    	\label{eq:5}
  		    	\end{aligned}
  		    \end{equation}
- 		 
+ 		    
+ 		    برای بدست آوردن ماتریس تبدیل $A$ کافی است از عبارت
+ 		    \ref{eq:5}
+ 		    نسبت به $َA$ مشتق بگیریم و برابر صفر بگذاریم. در این صورت به عبارت زیر دست می یابیم:
+ 		    \begin{equation}
+ 		    	\left( X \left( \left( 1 - \mu \right) M_{0} + \mu \sum _{c=1\mathrm{ }}^{C}M_{c} \right) X^{T} + \lambda I \right) A = XHX^{T}A \phi
+ 		    	\label{eq:6}
+ 		    \end{equation}
+ 		 	عبارت 
+ 		 	\ref{eq:6}
+ 		 	همان معادله ی معروف بردار و مقدار ویژه است. پس با پیدا کردن d بردار ویژه با کمترین مقدار ویژه خواهیم توانست ماتریس تبدیل $A$ را بدست آوریم. در اینجا سوالی پیش می آید که چرا مقدار بهینه
+ 		 	$\mu$
+ 		 	 را بدست نیاوردیم. نکته ی حائز اهمیت در اینجا این است که پارمتر 
+ 		 	$\mu$
+ 		 	 یک پارامتر آزاد نیست که بتوانیم آن را تخمین بزنیم بلکه 
+ 		 	$\mu$
+ 		 	 با توجه به توزیع داده ها تخمین زده می شود. بنابراین در واقعیت باید با توجه به کاربرد و با استفاده از روش ارزیابی متقابل مقدار بهینه 
+ 		 	$\mu$
+ 		 	 را بدست آوریم.
+ 	}
+ 	\subsubsection{W-BDA}
+ 	{
+ 		روش 
+ 		\lr{W-BDA}
+ 		همانند روش 
+ 		\lr{WBDA}
+ 		است با این تفاوت که با در نظر گرفتن نامتوازن بودن کلاس ها در داده ها تخمین دقیق تری را برای احتمال شرطی تعریف می کند.  همانطور که می دانیم در واقعیت ما نمیتوانیم احتمال 
+ 		$P(y|x)$
+ 		را به صورت مستقیم تخمین بزنیم به همین دلیل با استفاده از قانون بیز به جای آن احتمال 
+ 		$P(x|y)$
+ 		را تخمین میزنیم. روش 
+ 		\lr{W-BDA}
+ 		برای تخمین احتمال پیشین داده های موجود در دامنه مبدا و هدف به ترتیب از دو ضریب 
+ 		$\alpha_s$
+ 		و 
+ 		$\alpha_t$
+ 	  استفاده می کند که با استفاده از آن ها تناسب کلاس های هر دامنه را متوازن می کند. اگر بخواهیم این مسئله را به صورت ریاضی بیان کنیم خواهیم داشت:
+ 		\begin{equation}
+ 		\begin{aligned}
+ 		Dist({P(y_s|x}_s),{P(y_t|x}_t))= \Vert P \left( y_{s} \vert x_{s} \right)  -P \left( y_{t} \vert x_{t} \right) \Vert  _{H}^{2}\\
+ 		= \bigg \Vert \frac{P \left( y_{s} \right) }{P \left( x_{s} \right) }P \left( y_{s} \vert x_{s} \right)  -\frac{P \left( y_{t} \right) }{P \left( x_{t} \right) }P \left( y_{t} \vert x_{t} \right) \bigg \Vert  _{H}^{2}\quad \quad \quad \quad \quad\\
+ 		= \Vert \alpha _{s}P \left( y_{s} \vert x_{s} \right)  - \alpha _{t}P \left( y_{t} \vert x_{t} \right)  \Vert  _{H}^{2} \quad \quad \quad \quad \quad \quad \quad \quad \quad 
+ 		\end{aligned}
+ 		\label{eq:7}
+ 		\end{equation}
+ 		
+ 		بنابراین با توجه به توضیحات بالا در روش 
+ 		\lr{W-BDA}
+ 		کافی است معادله ی 
+ 		\ref{eq:4}
+ 		را به معادله ی زیر تغییر دهیم:
+ 		\begin{equation}
+ 		\begin{aligned}
+ 		min \quad tr \left( A^{T}X \left( \left( 1 - \mu \right) M_{0} + \mu \sum _{c=1\mathrm{ }}^{C}W_{c} \right) X^{T}A \right) + \lambda \Vert A \Vert_{F}^{2} \\
+ 		s.t. \quad A^{T}XHX^{T}A = I, \quad  0  \leq \mu \leq  1 \quad \quad \quad \quad \quad
+ 		\label{eq:8}
+ 		\end{aligned}
+ 		\end{equation}
+ 		
+ 		\begin{figure}
+ 			\centering
+ 			\includegraphics[scale=0.5]{images/table1.jpg}
+ 			\caption{}
+ 			\label{fig:5}
+ 		\end{figure}
+ 	
+ 	به طور خلاصه الگوریتم دو روش 
+ 	\lr{BDA}
+ 	و
+ 	\lr{W-BDA}
+ 	را میتوانید در شکل
+ 	\ref{fig:5}
+ 	 مشاهده کنید.
+ 		
  	}
 	}
 
-	
-	
-	
-	
 	\subsection{
 		انتقال یادگیری آسان با استفاده از ساختارهای درون دامنه
 		\protect \footnote{\lr{Easy Transfer Learning By Exploiting Intra-domain Structures}}
 	}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{images/easyTL.JPG}
+	\caption{ فرآیند روش 
+	\lr{\textit{EasyTL}}  }
+	\label{fig:6}
+\end{figure}
+		 بیشتر روش‌های سنتی و عمیق در انتقال یادگیری، روش‌های پارامتری است که باید طی فرآیندی بسیار گران قیمت و وقت گیر پارامترهای آن را تنظیم کند. ارزیابی متقابل، که متداول‌ترین استراتژی برای انتخاب مدل‌ها و تنظیم پارامترها است، در انتقال یادگیری قابل استفاده نیست زیرا اغلب داده‌های برچسب خورده در دامنه هدف وجود ندارد. اگرچه روش‌های اخیر AutoML می‌تواند به طور خودکار پارامترها را از طریق هرس درخت، boosting و شبکه‌های عصبی تنظیم کنند اما آن‌ها قادر به مدیریت توزیع‌های مختلف بین دامنه‌ها نیستند و به طور معمول مدت زمان زیادی برای همگرایی لازم دارند. در مقاله
+\cite{wang2019easy}
+الگوریتمی پیشنهاد شده است که روشی ساده اما کارآمد را پیشنهاد می‌دهد که علاوه بر این‌که مشکلات ذکر شده را حل می‌کند، این امکان را فراهم می‌کند که بتوان الگوریتم یادگیری انتقال را بر روی دستگاه‌های کوچک که دارای منایع محاسباتی محدود هستند نیز اجرا کرد. اسم این روش را
+\lr{\textit{EasyTL}}
+نامیدند.
+\lr{\textit{EasyTL}} 
+قادر است بدون نیاز به انتخاب مدل و تنظیم هایپرپارامترها ، انتقال دانش را در دامنه‌ها انجام دهد.
+\lr{\textit{EasyTL}}
+با بهره برداری از ساختارهای درون دامنه، هم انتقال ویژگی‌ها و هم انتقال طبقه‌بند را به صورت غیر پارامتری می‌آموزد. برای انتقال ویژگی‌ها روشی به نام
+\lr{\textit{intra-domain alignment}} 
+ و برای انتقال طبقه بند روشی به نام
+\lr{\textit{intra-domain programming}} 
+  را معرفی کرده است(شکل 
+\ref{fig:6}
+  ). در ادامه به توضیح جزئیات هر کدام از این روش‌ها می‌پردازیم.
+\subsubsection{\lr{intra-domain programming} }
+\subsubsection{\lr{intra-domain alignment}}
 }
 
 
