@@ -4,35 +4,41 @@
 \cite{wang2019easy}
 بیان شده است در روش 
 \lr{\textit{EasyTL}}
-باید دو قسمت زیر را پیاده‌سازی کنیم:
-\begin{enumerate}
-	\item{\lr{\textit{Intra-domain programming}}}
-	\item {\lr{\textit{Intra-domain alignment}}}
-\end{enumerate}
-
-بخش 
+باید دو بخش 
 \lr{\textit{Intra-domain programming}}
-شامل 3 مرحله نیز می‌باشد:
+و
+\lr{\textit{Intra-domain alignment}}
+را پیاده‌سازی کنیم. بخش 
+\lr{\textit{Intra-domain programming}}
+شامل 3 مرحله می‌باشد:
 \begin{enumerate}
 	\item{	
-		محاسبه‌ی بردار مراکز کلاس‌های دامنه‌ی مبدا $h_c$: این قسمت در تابع 
+		محاسبه‌ی بردار مراکز کلاس‌های دامنه‌ی مبدا $h_c$ با استفاده از معادله‌ی 
+		\ref{eq:11}
+		: این قسمت در تابع 
 		\lr{\textbf{\textit{get\_class\_center(Xs, Ys)}}}
 		پیاده‌سازی شده است.}
 	\item{
-		محاسبه‌ی ماتریس فاصله $D$: این قسمت در تابع 
+		محاسبه‌ی ماتریس فاصله $D$ با استفاده از معادله‌ی 
+		\ref{eq:10}
+		: این قسمت در تابع 
 		\lr{\textbf{\textit{get\_distance\_matrix(Xt, class\_center)}}}
 		پیاده‌سازی شده است.}
 	\item{
-		بدست آوردن ماتریس احتمال $M$ با استفاده از معادله‌ی فلان و بدست آوردن برچسب دامنه هدف: این قسمت در تابع 
+		بدست آوردن ماتریس احتمال $M$ با استفاده از معادله‌ی 
+		\ref{eq:12}
+		 و بدست آوردن برچسب دامنه هدف: این قسمت در تابع 
 	\lr{\textbf{\textit{solve\_LP(C, nt, Dcj)}}}
 	پیاده‌سازی شده است.}  
 \end{enumerate}
 
 سپس از نتایج این سه تابع استفاده می‌کنیم و آن‌ها را در تابع 
 \lr{\textbf{\textit{intra\_domain\_programming(Xs, Ys, Xt, Yt)}}}
-با هم ترکیب می‌کنیم.در بخش 
+با هم ترکیب می‌کنیم. در بخش 
 \lr{\textit{Intra-domain alignment}}
-کافی است تنها معادله‌ی فلان را پیاده‌سازی کنیم. بدین منظور از تابع 
+کافی است تنها معادله‌ی 
+\ref{eq:14}
+ را پیاده‌سازی کنیم. بدین منظور از تابع 
 \lr{\textbf{\textit{intra\_domain\_alignment(Xs, Xt)}}}
 استفاده می‌کنیم.
 
@@ -44,7 +50,7 @@
 \begin{enumerate}
 	\item {
 		\lr{\textit{Amazon Review}}
-		یک مجموعه داده تجزیه و تحلیل احساسات است که شامل بررسی‌های مثبت و منفی چهار نوع محصول است: لوازم آشپزخانه ، دی وی دی، الکترونیک و کتاب}
+		یک مجموعه داده تجزیه و تحلیل احساسات است که شامل بررسی‌های مثبت و منفی چهار نوع محصول است: لوازم آشپزخانه ، دی وی دی، الکترونیک و کتاب.}
 
 	\item{
 		\lr{\textit{Office-Caltech}}
@@ -52,7 +58,7 @@
 	}
 	\item {
 		\lr{\textit{Image-CLEF DA}}
-		شامل 12 دسته تصویر متعلق به 3 حوزه است: Caltech ، ImageNet  و Pascal.
+		شامل 12 دسته تصویر متعلق به 3 حوزه است: Caltech ، ImageNet  و Pascal .
 	}
 
 	\item {
@@ -61,22 +67,27 @@
 	}
 \end{enumerate}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		\includegraphics[width=0.85\linewidth]{images/1_1.jpg}
-		\caption{}
+		\includegraphics[width=0.85\linewidth]{images/1_4.jpg}
+		\caption{نتایج مقاله}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.4\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=0.85\linewidth]{images/1_1.jpg}
+		\caption{نتایج پیاده‌سازی }
+	\end{subfigure}%
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/1_2.jpg}
-		\caption{}
+		\caption{مقایسه دقت}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.4\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/1_3.jpg}
-		\caption{}
+		\caption{مقایسه زمان}
 	\end{subfigure}%
 	\caption{
 		نتایج روش
@@ -87,22 +98,27 @@
 	\label{fig:1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
-	\begin{subfigure}[b]{0.3\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/2_4.jpg}
+		\caption{نتایج مقاله}
+	\end{subfigure}%
+	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/2_1.jpg}
-		\caption{}
+		\caption{نتایج پیاده‌سازی}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.35\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/2_2.jpg}
-		\caption{}
+		\caption{مقایسه دقت}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.35\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/2_3.jpg}
-		\caption{}
+		\caption{مقایسه زمان}
 	\end{subfigure}%
 	\caption{
 		نتایج روش
@@ -113,22 +129,27 @@
 	\label{fig:2}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
-	\begin{subfigure}[b]{0.25\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/3_4.jpg}
+		\caption{نتایج مقاله}
+	\end{subfigure}%
+	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/3_1.jpg}
-		\caption{}
+		\caption{نتایج پیاده‌سازی}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.35\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/3_2.jpg}
-		\caption{}
+		\caption{مقایسه دقت}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.35\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/3_3.jpg}
-		\caption{}
+		\caption{مقایسه زمان}
 	\end{subfigure}%
 	\caption{
 		نتایج روش
@@ -139,22 +160,27 @@
 	\label{fig:3}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
-	\begin{subfigure}[b]{0.25\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/4_4.jpg}
+		\caption{نتایج مقاله}
+	\end{subfigure}%
+	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/4_1.jpg}
-		\caption{}
+		\caption{نتایج پیاده‌سازی}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.35\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/4_2.jpg}
-		\caption{}
+		\caption{مقایسه دقت}
 	\end{subfigure}%
-	\begin{subfigure}[b]{0.35\textwidth}
+	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/4_3.jpg}
-		\caption{}
+		\caption{مقایسه زمان}
 	\end{subfigure}%
 	\caption{
 		نتایج روش
@@ -164,7 +190,7 @@
 	}
 	\label{fig:4}
 \end{figure}
-
+\newpage
 نتایج اجرای روش
 \lr{EasyTL}
 را بر روی 4 تا مجموعه‌داده ذکر شده را در شکل‌های
@@ -175,7 +201,9 @@
 \ref{fig:3}
 و
 \ref{fig:4}
-می‌توانید مشاهده کنید. از مقایسه‌ی شکل‌های قسمت (آ) در تمامی شکل‌های 
+می‌توانید مشاهده کنید. 
+
+از مقایسه‌ی شکل‌های قسمت (آ) و(ب) در تمامی شکل‌های 
 \ref{fig:1}
 ،
 \ref{fig:2}
@@ -183,7 +211,7 @@
 \ref{fig:3}
 و
 \ref{fig:4}
- با نتایج مقاله به این نتیجه می‌رسیم که دقت‌هایی که بدست آوردیم کاملا مطابق با دقت‌های مقاله است. از شکل‌های قسمت (ب) و (ج) در تمامی شکل‌های
+ با نتایج مقاله به این نتیجه می‌رسیم که دقت‌هایی که بدست آوردیم کاملا مطابق با دقت‌های مقاله است. از نمودار‌های قسمت (ج) و (د) در تمامی شکل‌های
 \ref{fig:1}
 ،
 \ref{fig:2}
@@ -191,14 +219,16 @@
 \ref{fig:3}
 و
 \ref{fig:4}
-می‌توانیم به یک نتیجه‌گیری کلی برسیم و آن این است که دقت در حالتی که روش 
+می‌توانیم به یک نتیجه‌گیری کلی برسیم که دقت در حالتی که روش 
 \lr{\textit{EasyTL}}
- را بدون تراز کردن اجرا می‌کنیم با حالتی که تراز کردن را در نظر نمی‌گیریم تفاوت چندانی ندارد اما از لحاظ زمان و سرعت روش 
+ را با تراز کردن اجرا می‌کنیم بیشتر از  حالتی است که تراز کردن را در نظر نمی‌گیریم. اگر چه دقت این دو با یکدیگر تفاوت چندانی ندارد اما از لحاظ زمان و سرعت، روش 
  \lr{\textit{EasyTL}}
  بدون تراز کردن بسیار سریعتر است و نیاز به زمان کمتری دارد. بنابراین در کاربردهایی که دقت برای ما از اهمیت بالایی برخوردار است می‌توانیم از روش 
  \lr{\textit{EasyTL}}
  با تراز کردن استفاده کنیم و در کاربردهایی که سرعت برای ما مهم است روش 
  \lr{\textit{EasyTL}}
-  را بدون تراز کردن استفاده کنیم. به عبارت دیگر در اینجا با یک مصالحه‌ای رو به رو هستیم که با توجه به کاربرد باید تصمیم بگیریم که از کدام روش استفاده کنیم. 
+  را بدون تراز کردن استفاده کنیم. به عبارت دیگر در اینجا با یک مصالحه‌
+  \footnote{trade-off}
+   رو به رو هستیم که با توجه به کاربرد باید تصمیم بگیریم که از کدام روش استفاده کنیم. 
   
   
